@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            display: flex;
+        }
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 60px;
+        }
+        .intro {
+            font-family: 'Silkscreen', 'Courier New', monospace;
+            text-align: left;
+        }
+        .greeting {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 0.1em;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .name {
+            font-size: 72px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: flex-start;
+            gap: 0.02em;
+            margin-bottom: 30px;
+        }
+        .name span {
+            display: inline-block;
+            text-shadow:
+                2px 2px 0 #fff,
+                -2px -2px 0 #fff,
+                2px -2px 0 #fff,
+                -2px 2px 0 #fff,
+                4px 4px 0 #fff,
+                5px 5px 0 currentColor,
+                6px 6px 0 #fff,
+                7px 7px 0 currentColor;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+        }
+        .name span:hover {
+            transform: translateY(-15px);
+        }
+        .letter-1 { color: #DB4C40; }
+        .letter-2 { color: #439775; }
+        .letter-3 { color: #43291F; }
+        .letter-4 { color: #797A9E; }
+        .letter-5 { color: #F58F00; }
+        .letter-6 { color: #C7E8F3; }
+        .social-links {
+            display: flex;
+            justify-content: flex-start;
+            gap: 24px;
+        }
+        .social-links a {
+            color: #555;
+            transition: color 0.2s, transform 0.2s;
+        }
+        .social-links a:hover {
+            color: #000;
+            transform: scale(1.1);
+        }
+        .social-links svg {
+            width: 28px;
+            height: 28px;
+        }
+        .right-panel {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        #canvas {
+            display: block;
+            height: 100vh;
+            width: auto;
+        }
+        .loading {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 12px;
+            color: #999;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .loading.hidden {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+            }
+            .left-panel {
+                padding: 30px 20px;
+            }
+            .greeting {
+                font-size: 20px;
+            }
+            .name {
+                font-size: 36px;
+            }
+            .right-panel {
+                justify-content: center;
+            }
+            #canvas {
+                height: auto;
+                width: 100%;
+                max-height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="intro">
+            <div class="greeting">Hi, I'm</div>
+            <div class="name">
+                <span class="letter-1">J</span>
+                <span class="letter-2">O</span>
+                <span class="letter-3">S</span>
+                <span class="letter-4">E</span>
+                <span class="letter-5">P</span>
+                <span class="letter-6">H</span>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+                <a href="mailto:joseph.e.hartono@gmail.com" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div class="loading" id="loading">Loading...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3-delaunay@6"></script>
+
+    <script>
+        const CONFIG = {
+            numPoints: 11100,
+            minDotSize: 1,
+            maxDotSize: 2,
+            iterations: 20,
+            // Animation settings
+            driftSpeed: 0.3,
+            driftAmount: 2,
+            mouseRadius: 100,
+            mouseStrength: 0.15
+        };
+
+        class StipplePortrait {
+            constructor() {
+                this.canvas = document.getElementById('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.loadingEl = document.getElementById('loading');
+
+                this.imageData = null;
+                this.brightnessData = null;
+                this.points = [];
+                this.basePoints = []; // Original positions
+                this.width = 0;
+                this.height = 0;
+
+                // Mouse tracking
+                this.mouse = { x: -1000, y: -1000 };
+                this.canvasRect = null;
+
+                // Animation
+                this.time = 0;
+                this.animating = false;
+
+                this.loadDefaultImage();
+                this.setupMouseTracking();
+            }
+
+            setupMouseTracking() {
+                this.canvas.addEventListener('mousemove', (e) => {
+                    this.canvasRect = this.canvas.getBoundingClientRect();
+                    const scaleX = this.width / this.canvasRect.width;
+                    const scaleY = this.height / this.canvasRect.height;
+                    this.mouse.x = (e.clientX - this.canvasRect.left) * scaleX;
+                    this.mouse.y = (e.clientY - this.canvasRect.top) * scaleY;
+                });
+
+                this.canvas.addEventListener('mouseleave', () => {
+                    this.mouse.x = -1000;
+                    this.mouse.y = -1000;
+                });
+            }
+
+            loadDefaultImage() {
+                const img = new Image();
+                img.onload = () => this.processImage(img);
+                img.onerror = () => {
+                    this.loadingEl.textContent = 'Failed to load portrait.png';
+                };
+                img.src = 'portrait.png';
+            }
+
+            processImage(img) {
+                const maxH = window.innerHeight;
+                let w = img.width;
+                let h = img.height;
+
+                const scale = maxH / h;
+                w = Math.floor(w * scale);
+                h = Math.floor(h * scale);
+
+                this.width = w;
+                this.height = h;
+                this.canvas.width = w;
+                this.canvas.height = h;
+
+                this.ctx.drawImage(img, 0, 0, w, h);
+                this.imageData = this.ctx.getImageData(0, 0, w, h);
+                this.computeBrightnessData();
+                this.runStippling();
+            }
+
+            computeBrightnessData() {
+                const data = this.imageData.data;
+                this.brightnessData = new Float32Array(this.width * this.height);
+
+                for (let y = 0; y < this.height; y++) {
+                    for (let x = 0; x < this.width; x++) {
+                        const i = (y * this.width + x) * 4;
+                        const brightness = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+                        this.brightnessData[y * this.width + x] = brightness;
+                    }
+                }
+
+                this.brightnessData = this.boxBlur(this.brightnessData, this.width, this.height, 2);
+            }
+
+            boxBlur(data, width, height, radius) {
+                const result = new Float32Array(width * height);
+
+                for (let y = 0; y < height; y++) {
+                    for (let x = 0; x < width; x++) {
+                        let sum = 0, count = 0;
+
+                        for (let dy = -radius; dy <= radius; dy++) {
+                            for (let dx = -radius; dx <= radius; dx++) {
+                                const nx = x + dx, ny = y + dy;
+                                if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                                    sum += data[ny * width + nx];
+                                    count++;
+                                }
+                            }
+                        }
+                        result[y * width + x] = sum / count;
+                    }
+                }
+                return result;
+            }
+
+            initializePoints() {
+                this.points = [];
+                let attempts = 0;
+                const maxAttempts = CONFIG.numPoints * 100;
+
+                while (this.points.length < CONFIG.numPoints && attempts < maxAttempts) {
+                    attempts++;
+                    const x = Math.random() * this.width;
+                    const y = Math.random() * this.height;
+                    const brightness = this.sampleBrightness(x, y);
+                    const density = 1 - (brightness / 255);
+
+                    if (Math.random() < density) {
+                        this.points.push({ x, y });
+                    }
+                }
+
+                while (this.points.length < CONFIG.numPoints) {
+                    this.points.push({
+                        x: Math.random() * this.width,
+                        y: Math.random() * this.height
+                    });
+                }
+            }
+
+            sampleBrightness(x, y) {
+                const x0 = Math.floor(x), y0 = Math.floor(y);
+                const x1 = Math.min(x0 + 1, this.width - 1);
+                const y1 = Math.min(y0 + 1, this.height - 1);
+                const fx = x - x0, fy = y - y0;
+
+                const b00 = this.brightnessData[y0 * this.width + x0];
+                const b10 = this.brightnessData[y0 * this.width + x1];
+                const b01 = this.brightnessData[y1 * this.width + x0];
+                const b11 = this.brightnessData[y1 * this.width + x1];
+
+                const b0 = b00 * (1 - fx) + b10 * fx;
+                const b1 = b01 * (1 - fx) + b11 * fx;
+
+                return b0 * (1 - fy) + b1 * fy;
+            }
+
+            computeVoronoi() {
+                this.delaunay = d3.Delaunay.from(this.points, p => p.x, p => p.y);
+                this.voronoi = this.delaunay.voronoi([0, 0, this.width, this.height]);
+            }
+
+            computeWeightedCentroids() {
+                const newPoints = [];
+
+                for (let i = 0; i < this.points.length; i++) {
+                    const cell = this.voronoi.cellPolygon(i);
+
+                    if (!cell || cell.length < 3) {
+                        newPoints.push({ ...this.points[i] });
+                        continue;
+                    }
+
+                    let minX = Infinity, minY = Infinity;
+                    let maxX = -Infinity, maxY = -Infinity;
+
+                    for (const [px, py] of cell) {
+                        minX = Math.min(minX, px);
+                        minY = Math.min(minY, py);
+                        maxX = Math.max(maxX, px);
+                        maxY = Math.max(maxY, py);
+                    }
+
+                    minX = Math.max(0, Math.floor(minX));
+                    minY = Math.max(0, Math.floor(minY));
+                    maxX = Math.min(this.width - 1, Math.ceil(maxX));
+                    maxY = Math.min(this.height - 1, Math.ceil(maxY));
+
+                    let sumX = 0, sumY = 0, sumWeight = 0;
+                    const cellWidth = maxX - minX;
+                    const cellHeight = maxY - minY;
+                    const step = Math.max(1, Math.floor(Math.min(cellWidth, cellHeight) / 10));
+
+                    for (let y = minY; y <= maxY; y += step) {
+                        for (let x = minX; x <= maxX; x += step) {
+                            if (this.pointInPolygon(x, y, cell)) {
+                                const brightness = this.brightnessData[y * this.width + x];
+                                const weight = 256 - brightness;
+                                sumX += x * weight;
+                                sumY += y * weight;
+                                sumWeight += weight;
+                            }
+                        }
+                    }
+
+                    if (sumWeight > 0) {
+                        newPoints.push({ x: sumX / sumWeight, y: sumY / sumWeight });
+                    } else {
+                        const cx = cell.reduce((sum, p) => sum + p[0], 0) / cell.length;
+                        const cy = cell.reduce((sum, p) => sum + p[1], 0) / cell.length;
+                        newPoints.push({ x: cx, y: cy });
+                    }
+                }
+
+                this.points = newPoints;
+            }
+
+            pointInPolygon(x, y, polygon) {
+                let inside = false;
+                const n = polygon.length;
+
+                for (let i = 0, j = n - 1; i < n; j = i++) {
+                    const xi = polygon[i][0], yi = polygon[i][1];
+                    const xj = polygon[j][0], yj = polygon[j][1];
+
+                    if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) {
+                        inside = !inside;
+                    }
+                }
+                return inside;
+            }
+
+            render() {
+                this.ctx.fillStyle = '#ffffff';
+                this.ctx.fillRect(0, 0, this.width, this.height);
+
+                this.ctx.fillStyle = '#000000';
+
+                for (let i = 0; i < this.points.length; i++) {
+                    // Use basePoints if available (animation mode), otherwise use points (stippling mode)
+                    const base = this.basePoints[i] || this.points[i];
+                    const point = this.points[i];
+
+                    const brightness = this.sampleBrightness(base.x, base.y);
+                    const t = 1 - (brightness / 255);
+                    const radius = CONFIG.minDotSize + t * (CONFIG.maxDotSize - CONFIG.minDotSize);
+
+                    this.ctx.beginPath();
+                    this.ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+                    this.ctx.fill();
+                }
+            }
+
+            animatePoints() {
+                this.time += 0.02;
+
+                for (let i = 0; i < this.points.length; i++) {
+                    const base = this.basePoints[i];
+
+                    // Subtle drift using noise-like motion
+                    const noiseX = Math.sin(this.time + i * 0.01) * Math.cos(this.time * 0.7 + i * 0.02);
+                    const noiseY = Math.cos(this.time * 0.8 + i * 0.015) * Math.sin(this.time * 0.6 + i * 0.01);
+
+                    let targetX = base.x + noiseX * CONFIG.driftAmount;
+                    let targetY = base.y + noiseY * CONFIG.driftAmount;
+
+                    // Mouse attraction
+                    const dx = this.mouse.x - base.x;
+                    const dy = this.mouse.y - base.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < CONFIG.mouseRadius && dist > 0) {
+                        const force = (1 - dist / CONFIG.mouseRadius) * CONFIG.mouseStrength;
+                        targetX += dx * force;
+                        targetY += dy * force;
+                    }
+
+                    // Smooth interpolation
+                    this.points[i].x += (targetX - this.points[i].x) * 0.1;
+                    this.points[i].y += (targetY - this.points[i].y) * 0.1;
+                }
+            }
+
+            startAnimation() {
+                if (this.animating) return;
+                this.animating = true;
+
+                const animate = () => {
+                    if (!this.animating) return;
+                    this.animatePoints();
+                    this.render();
+                    requestAnimationFrame(animate);
+                };
+                animate();
+            }
+
+            async runStippling() {
+                this.initializePoints();
+
+                for (let i = 0; i < CONFIG.iterations; i++) {
+                    this.computeVoronoi();
+                    this.computeWeightedCentroids();
+                    this.render();
+
+                    this.loadingEl.textContent = `Processing... ${Math.round((i + 1) / CONFIG.iterations * 100)}%`;
+                    await new Promise(resolve => setTimeout(resolve, 0));
+                }
+
+                // Store base positions and start animation
+                this.basePoints = this.points.map(p => ({ x: p.x, y: p.y }));
+                this.loadingEl.classList.add('hidden');
+                this.startAnimation();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new StipplePortrait();
+        });
+    </script>
+</body>
+</html>
