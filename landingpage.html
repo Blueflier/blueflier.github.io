@@ -15,13 +15,21 @@
         }
         html, body {
             width: 100%;
-            height: 100%;
-            overflow: hidden;
+            min-height: 100%;
+            overflow-x: hidden;
             background: #fff;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         body {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            width: 100%;
+            height: 100vh;
             display: flex;
+            overflow: hidden;
         }
         .left-panel {
             flex: 1;
@@ -105,23 +113,8 @@
             height: 100vh;
             width: auto;
         }
-        .loading {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 12px;
-            color: #999;
-            background: rgba(255,255,255,0.9);
-            padding: 8px 16px;
-            border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .loading.hidden {
-            display: none;
-        }
-
         @media (max-width: 900px) {
-            body {
+            .hero-section {
                 position: relative;
                 display: block;
             }
@@ -145,11 +138,14 @@
                 bottom: 0;
                 left: 0;
                 width: 100%;
+                height: 100%;
                 z-index: 2;
                 padding: 20px;
-                background: rgba(255, 255, 255, 0.75);
-                backdrop-filter: blur(10px);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
                 align-items: stretch;
+                background: linear-gradient(to top, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0) 60%);
             }
             .intro {
                 display: flex;
@@ -157,6 +153,7 @@
                 justify-content: space-between;
                 align-items: flex-end;
                 width: 100%;
+                padding-bottom: 20px;
             }
             .greeting {
                 font-size: 16px;
@@ -175,45 +172,499 @@
                 height: 24px;
             }
         }
+
+        /* Experience Section */
+        .experience-section {
+            background: #d9d9d9;
+            padding: 60px 80px;
+            min-height: 100vh;
+        }
+        .experience-title {
+            font-family: 'Silkscreen', 'Courier New', monospace;
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            display: inline-flex;
+            gap: 0.02em;
+        }
+        .experience-title span {
+            display: inline-block;
+            color: #1a1a1a;
+            text-shadow:
+                2px 2px 0 #d9d9d9,
+                -2px -2px 0 #d9d9d9,
+                2px -2px 0 #d9d9d9,
+                -2px 2px 0 #d9d9d9,
+                4px 4px 0 #d9d9d9,
+                5px 5px 0 currentColor,
+                6px 6px 0 #d9d9d9,
+                7px 7px 0 currentColor;
+        }
+        .experience-title-underline {
+            text-decoration: underline;
+            text-decoration-color: #4a7cbb;
+            text-decoration-thickness: 4px;
+            text-underline-offset: 8px;
+        }
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .experience-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+        }
+        .job-card {
+            background: #fff;
+            border: 3px solid #1a1a1a;
+            border-radius: 0;
+            padding: 20px 30px;
+            min-width: 280px;
+            max-width: 280px;
+            flex-shrink: 0;
+            box-shadow: 8px 8px 0 #a0a0a0;
+        }
+        .job-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        .job-company {
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 2px;
+        }
+        .job-date {
+            font-size: 14px;
+            color: #666;
+        }
+        .connector {
+            width: 60px;
+            height: 3px;
+            background: #1a1a1a;
+            margin-top: 35px;
+            flex-shrink: 0;
+        }
+        .job-details {
+            flex: 1;
+            padding-top: 10px;
+        }
+        .job-skills {
+            color: #6a5acd;
+            font-size: 15px;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .job-skills strong {
+            color: #6a5acd;
+        }
+        .job-bullets {
+            list-style: disc;
+            padding-left: 20px;
+            color: #1a1a1a;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .job-bullets li {
+            margin-bottom: 12px;
+        }
+        .job-bullets strong {
+            font-weight: 600;
+        }
+
+        /* My Story Section */
+        .story-section {
+            background: #fff;
+            padding: 60px 80px;
+            min-height: 100vh;
+        }
+        .story-title {
+            font-family: 'Silkscreen', 'Courier New', monospace;
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            display: inline-flex;
+            gap: 0.02em;
+        }
+        .story-title span {
+            display: inline-block;
+            color: #1a1a1a;
+            text-shadow:
+                2px 2px 0 #fff,
+                -2px -2px 0 #fff,
+                2px -2px 0 #fff,
+                -2px 2px 0 #fff,
+                4px 4px 0 #fff,
+                5px 5px 0 currentColor,
+                6px 6px 0 #fff,
+                7px 7px 0 currentColor;
+        }
+        .story-title-underline {
+            text-decoration: underline;
+            text-decoration-color: #DB4C40;
+            text-decoration-thickness: 4px;
+            text-underline-offset: 8px;
+        }
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .story-paragraph {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 32px;
+        }
+        .story-paragraph:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            padding: 40px 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        .footer-links a {
+            color: #fff;
+            transition: color 0.2s, transform 0.2s;
+        }
+        .footer-links a:hover {
+            color: #FFA500;
+            transform: scale(1.1);
+        }
+        .footer-links svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* Email copy indicator */
+        .email-link {
+            position: relative;
+        }
+        .email-copied {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            color: #1a1a1a;
+            padding: 4px 8px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+            margin-top: 8px;
+        }
+        .email-copied.show {
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .story-section {
+                padding: 40px 30px;
+            }
+            .story-title {
+                font-size: 48px;
+                justify-content: center;
+            }
+            .story-title-underline {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .story-title {
+                font-size: 40px;
+            }
+            .story-paragraph {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .experience-section {
+                padding: 40px 30px;
+            }
+            .experience-title-underline {
+                text-align: center;
+            }
+            .experience-title {
+                font-size: 48px;
+                justify-content: center;
+            }
+            .experience-list {
+                align-items: center;
+                width: 100%;
+            }
+            .experience-item {
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                width: 100%;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+            .job-card {
+                width: 100%;
+                max-width: 500px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                transition: background-color 0.2s ease;
+            }
+            .job-card:hover {
+                background-color: #FFA500;
+            }
+            .job-card-content {
+                flex: 1;
+            }
+            .job-card-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 24px;
+                margin-left: 16px;
+                transition: transform 0.3s ease;
+            }
+            .job-card-toggle::after {
+                content: '';
+                width: 0;
+                height: 0;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-top: 10px solid #1a1a1a;
+            }
+            .experience-item.expanded .job-card-toggle {
+                transform: rotate(180deg);
+            }
+            .job-details {
+                max-height: 0;
+                overflow: hidden;
+                padding-top: 0;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+            }
+            .experience-item.expanded .job-details {
+                max-height: 1000px;
+                padding-top: 20px;
+            }
+            .job-details {
+                width: 100%;
+                max-width: 500px;
+            }
+            .connector {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .experience-title {
+                font-size: 40px;
+            }
+            .experience-item {
+                max-width: 100%;
+            }
+        }
+
+        /* Desktop: hide toggle arrow */
+        @media (min-width: 1101px) {
+            .job-card-toggle {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="left-panel">
-        <div class="intro">
-            <div class="text-content">
-                <div class="greeting">Hi, I'm</div>
-                <div class="name">
-                    <span class="letter-1">J</span>
-                    <span class="letter-2">O</span>
-                    <span class="letter-3">S</span>
-                    <span class="letter-4">E</span>
-                    <span class="letter-5">P</span>
-                    <span class="letter-6">H</span>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="left-panel">
+            <div class="intro">
+                <div class="text-content">
+                    <div class="greeting">Hi, I'm</div>
+                    <div class="name">
+                        <span class="letter-1">J</span>
+                        <span class="letter-2">O</span>
+                        <span class="letter-3">S</span>
+                        <span class="letter-4">E</span>
+                        <span class="letter-5">P</span>
+                        <span class="letter-6">H</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="email-link" id="emailCopyBtn" aria-label="Copy Email">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                        </svg>
+                        <span class="email-copied" id="emailCopiedIndicator">email copied</span>
+                    </a>
                 </div>
             </div>
-            <div class="social-links">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
-                <a href="mailto:joseph.e.hartono@gmail.com" aria-label="Email">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
-                    </svg>
-                </a>
+        </div>
+        <div class="right-panel">
+            <canvas id="canvas"></canvas>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section">
+        <div class="experience-title-underline">
+            <div class="experience-title">
+                <span>E</span><span>X</span><span>P</span><span>E</span><span>R</span><span>I</span><span>E</span><span>N</span><span>C</span><span>E</span>
             </div>
         </div>
-    </div>
-    <div class="right-panel">
-        <canvas id="canvas"></canvas>
-    </div>
-    <div class="loading" id="loading">Loading...</div>
+
+        <div class="experience-list">
+            <!-- AI Lab at Biola -->
+            <div class="experience-item">
+                <div class="job-card">
+                    <div class="job-card-content">
+                        <div class="job-title">Co-Founder</div>
+                        <div class="job-company">AI Lab at Biola University</div>
+                        <div class="job-date">Feb 2024 - Current | La Mirada, CA</div>
+                    </div>
+                    <div class="job-card-toggle"></div>
+                </div>
+                <div class="connector"></div>
+                <div class="job-details">
+                    <div class="job-skills">
+                        <strong>Skills:</strong> FullStack, Python, MLOps, AI/ML, Cross-functional Leadership, Policy Compliance
+                    </div>
+                    <ul class="job-bullets">
+                        <li>Orchestrated Cross-Departmental Compliance: Navigated the legal, IT, and HR hurdles of a 100-year-old institution to establish the <strong>university's first framework</strong> for AI integration, ensuring all administrative and academic deployments met strict security and policy standards.</li>
+                        <li>Developed Technical Automation Workflows: Built and deployed custom serverless agents for non-technical users using Python and the Gemini API to solve operational bottlenecks, replacing hours of common FAQ and communication tasks with <strong>automated systems</strong>.</li>
+                        <li>Mentored student teams to victory in a <strong>$250,000 global AI hackathon</strong>, leveraging that success to secure strategic corporate partnerships and collaborating with Marketing to rebrand the university as a premier hub for emerging tech innovation.</li>
+                        <li>Facilitated High-Leverage Talent Development: Coached 100+ <strong>faculty, students, and conferences</strong> on "human-in-the-loop" methodologies, focusing on practical AI literacy that prioritizes individual agency and real-world career readiness.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Stealth Startup -->
+            <div class="experience-item">
+                <div class="job-card">
+                    <div class="job-card-content">
+                        <div class="job-title">MLOps Engineer</div>
+                        <div class="job-company">Stealth Startup</div>
+                        <div class="job-date">July 2025 - Current | Phoenix, AZ</div>
+                    </div>
+                    <div class="job-card-toggle"></div>
+                </div>
+                <div class="connector"></div>
+                <div class="job-details">
+                    <div class="job-skills">
+                        <strong>Skills:</strong> Python, ETL Pipelines, Data Engineering, LLM Agents, Regex, Stakeholder Communication
+                    </div>
+                    <ul class="job-bullets">
+                        <li>Data Engineering & ETL: Architected a custom Python-based ETL pipeline to ingest and synthesize 16M+ messages from disparate, sparse datasets; implemented complex regex-driven normalization and data-bridging logic to transform unstructured conversational data into a unified, queryable format.</li>
+                        <li>ML Implementation & Strategy: Developed an LLM-based agent to analyze thousands of customer interactions, identifying key semantic patterns and performance bottlenecks that served as the primary "North Star" for the startup's data-driven operational strategy.</li>
+                        <li>Stakeholder Impact & Communication: Translated deep-dive data analysis into actionable sales intelligence, uncovering a single conversation metric responsible for <strong>90% of revenue</strong>; collaborated with stakeholders to retrain the sales team, resulting in a <strong>120% increase in conversion rate</strong> and enhanced lead qualification.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Samaritan's Purse -->
+            <div class="experience-item">
+                <div class="job-card">
+                    <div class="job-card-content">
+                        <div class="job-title">DevOps Product Dev Intern</div>
+                        <div class="job-company">Samaritan's Purse</div>
+                        <div class="job-date">May 2024 - Aug 2024 | Boone, NC</div>
+                    </div>
+                    <div class="job-card-toggle"></div>
+                </div>
+                <div class="connector"></div>
+                <div class="job-details">
+                    <div class="job-skills">
+                        <strong>Skills:</strong> C# .NET, Docker, Jenkins CI/CD, Kubernetes, OpenLens, Agile Scrum
+                    </div>
+                    <ul class="job-bullets">
+                        <li>Developed and deployed a canary monitoring system across 17 databases in three data centers using MVC C# .NET, Docker, and Jenkins CI/CD that resulted in a <strong>20% increase in overall uptime</strong>.</li>
+                        <li>Enhanced DevOps capabilities, streamlining deployments and boosting system reliability through cluster management, load balancing, CI/CD, and monitoring with OpenLens that allows future developers to test dependencies and fallbacks.</li>
+                        <li>Practiced Agile Scrum methodology, learned by reading PRs from Senior Engineers.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Story Section -->
+    <section class="story-section">
+        <div class="story-title-underline">
+            <div class="story-title">
+                <span>M</span><span>Y</span><span>&nbsp;</span><span>S</span><span>T</span><span>O</span><span>R</span><span>Y</span>
+            </div>
+        </div>
+
+        <div class="story-content">
+            <p class="story-paragraph">
+                Most people see AI as a way to replace human effort. I see it as a way to amplify human flourishing. As the Program Manager for the AI Lab at Biola University, I don't just automate processes; I build the environments where people and technology solve high-stakes problems together. I operate at the intersection of High-Level Design (HLD) and Human Agency, ensuring that every system I deploy makes the person using it look better, enjoy their work, and deliver higher-quality results.
+            </p>
+            <p class="story-paragraph">
+                I believe the best way to bridge the gap between technical potential and business reality is through immediate evidence. When stakeholders are hesitant about AI adoption, I don't give them a slide deck; I give them an MVP. By showing results right away, I help stakeholders visualize the trade-offs of their time and feel empowered to invest in the core business. For example, by teaching non-technical teams the basics of AI and data protection, I've successfully transitioned departments from manual, 300-hour processes to balanced, human-in-the-loop systems.
+            </p>
+            <p class="story-paragraph">
+                My philosophy is centered on unblocking the person to increase organizational velocity. I've realized that most operational bottlenecks are actually misalignments in vision rather than technical failures. I solve this by working simultaneously from a top-down and bottoms-up perspective to ensure everyone lands in the same place. This involves rooting every initiative in the company's core mission while deeply understanding what individual team members care about. By finding the middle ground where personal growth intersects with the project's success, I connect the right people to the right resources and create a flat hierarchy of high-agency individuals who can execute with little to no oversight.
+            </p>
+            <p class="story-paragraph">
+                I am always looking to learn from others who are navigating the complexities of people and systems. Whether you are actively building a team or just want to make a new friend, I'm always open to a conversation. My goal is to stay connected with those who view growth as a mission, and I'm happy to be a resource for anyone looking to help their people and their business reach their fullest potential.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+            <a href="#" class="email-link" id="footerEmailBtn" aria-label="Copy Email">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                </svg>
+                <span class="email-copied" id="footerEmailCopied">email copied</span>
+            </a>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/d3-delaunay@6"></script>
 
@@ -234,7 +685,6 @@
             constructor() {
                 this.canvas = document.getElementById('canvas');
                 this.ctx = this.canvas.getContext('2d');
-                this.loadingEl = document.getElementById('loading');
 
                 this.imageData = null;
                 this.brightnessData = null;
@@ -274,7 +724,7 @@
                 const img = new Image();
                 img.onload = () => this.processImage(img);
                 img.onerror = () => {
-                    this.loadingEl.textContent = 'Failed to load portrait.png';
+                    console.error('Failed to load portrait.png');
                 };
                 img.src = 'portrait.png';
             }
@@ -524,20 +974,61 @@
                     this.computeVoronoi();
                     this.computeWeightedCentroids();
                     this.render();
-
-                    this.loadingEl.textContent = `Processing... ${Math.round((i + 1) / CONFIG.iterations * 100)}%`;
                     await new Promise(resolve => setTimeout(resolve, 0));
                 }
 
                 // Store base positions and start animation
                 this.basePoints = this.points.map(p => ({ x: p.x, y: p.y }));
-                this.loadingEl.classList.add('hidden');
                 this.startAnimation();
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             new StipplePortrait();
+
+            // Mobile experience accordion toggle
+            const jobCards = document.querySelectorAll('.job-card');
+            jobCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Only toggle on mobile (when job-card-toggle is visible)
+                    const toggle = card.querySelector('.job-card-toggle');
+                    if (toggle && window.getComputedStyle(toggle).display !== 'none') {
+                        const experienceItem = card.closest('.experience-item');
+                        experienceItem.classList.toggle('expanded');
+                    }
+                });
+            });
+
+            // Email copy to clipboard
+            const emailAddress = 'joseph.e.hartono@gmail.com';
+
+            // Hero email button
+            const emailCopyBtn = document.getElementById('emailCopyBtn');
+            const emailCopiedIndicator = document.getElementById('emailCopiedIndicator');
+
+            emailCopyBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(emailAddress).then(() => {
+                    emailCopiedIndicator.classList.add('show');
+                    setTimeout(() => {
+                        emailCopiedIndicator.classList.remove('show');
+                    }, 2000);
+                });
+            });
+
+            // Footer email button
+            const footerEmailBtn = document.getElementById('footerEmailBtn');
+            const footerEmailCopied = document.getElementById('footerEmailCopied');
+
+            footerEmailBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(emailAddress).then(() => {
+                    footerEmailCopied.classList.add('show');
+                    setTimeout(() => {
+                        footerEmailCopied.classList.remove('show');
+                    }, 2000);
+                });
+            });
         });
     </script>
 </body>
