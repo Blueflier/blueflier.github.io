@@ -343,6 +343,77 @@
             margin-bottom: 0;
         }
 
+        /* Blogs Section */
+        .blogs-section {
+            background: #fff;
+            padding: 60px 80px;
+        }
+        .blogs-title {
+            font-family: 'Silkscreen', 'Courier New', monospace;
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            display: inline-flex;
+            gap: 0.02em;
+        }
+        .blogs-title span {
+            display: inline-block;
+            color: #1a1a1a;
+            text-shadow:
+                2px 2px 0 #fff,
+                -2px -2px 0 #fff,
+                2px -2px 0 #fff,
+                -2px 2px 0 #fff,
+                4px 4px 0 #fff,
+                5px 5px 0 currentColor,
+                6px 6px 0 #fff,
+                7px 7px 0 currentColor;
+        }
+        .blogs-title-underline {
+            text-decoration: underline;
+            text-decoration-color: #FFA500;
+            text-decoration-thickness: 4px;
+            text-underline-offset: 8px;
+        }
+        .blogs-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .blog-item {
+            display: block;
+            border: 3px solid #1a1a1a;
+            padding: 24px 32px;
+            box-shadow: 8px 8px 0 #888;
+            text-decoration: none;
+            color: #1a1a1a;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        .blog-item:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0 #888;
+            background-color: #FFA500;
+        }
+        .blog-date {
+            font-size: 14px;
+            color: #888;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+        .blog-item:hover .blog-date {
+            color: #1a1a1a;
+        }
+        .blog-title {
+            font-family: 'Silkscreen', 'Courier New', monospace;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
         /* Footer */
         .footer {
             background: #1a1a1a;
@@ -423,6 +494,31 @@
             }
             .story-paragraph {
                 font-size: 16px;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .blogs-section {
+                padding: 40px 30px;
+            }
+            .blogs-title {
+                font-size: 48px;
+                justify-content: center;
+            }
+            .blogs-title-underline {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .blogs-title {
+                font-size: 40px;
+            }
+            .blog-item {
+                padding: 20px 24px;
+            }
+            .blog-title {
+                font-size: 18px;
             }
         }
 
@@ -534,7 +630,7 @@
                         <span class="letter-5">P</span>
                         <span class="letter-6">H</span>
                     </div>
-                    <div class="subtitle">AI Business Operations Specialist</div>
+                    <div class="subtitle">How can technology and humans Co-create</div>
                 </div>
                 <div class="social-links">
                     <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -571,17 +667,37 @@
 
         <div class="story-content">
             <p class="story-paragraph">
-                Most people see AI as a way to replace human effort. I see it as a way to amplify human flourishing. As the Program Manager for the AI Lab at Biola University, I don't just automate processes; I build the environments where people and technology solve high-stakes problems together. I operate at the intersection of High-Level Design (HLD) and Human Agency, ensuring that every system I deploy makes the person using it look better, enjoy their work, and deliver higher-quality results.
+                I believe humans are uniquely designed — to create, to connect, to solve problems no machine ever could. The question was never whether AI would change the world, but whether we'd use it to amplify what makes us irreplaceable. That's the work I care about: building the infrastructure that lets people do more of what they're great at.
             </p>
             <p class="story-paragraph">
-                I believe the best way to bridge the gap between technical potential and business reality is through immediate evidence. When stakeholders are hesitant about AI adoption, I don't give them a slide deck; I give them an MVP. By showing results right away, I help stakeholders visualize the trade-offs of their time and feel empowered to invest in the core business. For example, by teaching non-technical teams the basics of AI and data protection, I've successfully transitioned departments from manual, 300-hour processes to balanced, human-in-the-loop systems.
+                Technology, especially AI, is not the point. It's the bridge. The real goal is bringing people closer together — closing the gap between what a team is capable of and what they actually deliver. I build systems that remove friction so people can focus on the high-judgment, deeply human work that moves organizations forward.
             </p>
             <p class="story-paragraph">
-                My philosophy is centered on unblocking the person to increase organizational velocity. I've realized that most operational bottlenecks are actually misalignments in vision rather than technical failures. I solve this by working simultaneously from a top-down and bottoms-up perspective to ensure everyone lands in the same place. This involves rooting every initiative in the company's core mission while deeply understanding what individual team members care about. By finding the middle ground where personal growth intersects with the project's success, I connect the right people to the right resources and create a flat hierarchy of high-agency individuals who can execute with little to no oversight.
+                Most bottlenecks aren't technical; they're misalignments between people. I work from the top down and the bottom up at the same time, connecting a company's mission to what individual team members actually care about. When those two things align, you get high-agency people who execute with little oversight and genuinely enjoy the work.
             </p>
             <p class="story-paragraph">
-                I am always looking to learn from others who are navigating the complexities of people and systems. Whether you are actively building a team or just want to make a new friend, I'm always open to a conversation. My goal is to stay connected with those who view growth as a mission, and I'm happy to be a resource for anyone looking to help their people and their business reach their fullest potential.
+                I'm always looking to learn from others navigating the complexities of people and systems. Whether you're building a team or just want to make a new friend, I'm open to a conversation. Growth is a mission, and I'm happy to be a resource for anyone working to help their people reach their fullest potential.
             </p>
+        </div>
+    </section>
+
+    <!-- Blogs Section -->
+    <section class="blogs-section">
+        <div class="blogs-title-underline">
+            <div class="blogs-title">
+                <span>B</span><span>L</span><span>O</span><span>G</span><span>S</span>
+            </div>
+        </div>
+
+        <div class="blogs-list">
+            <a class="blog-item" href="https://josephhartono.substack.com/p/why-steve-jobs-was-the-goat" target="_blank" rel="noopener noreferrer">
+                <div class="blog-date">Feb 2026</div>
+                <div class="blog-title">Why Steve Jobs Was The GOAT</div>
+            </a>
+            <a class="blog-item" href="https://josephhartono.substack.com/p/the-greatest-problem-solvers" target="_blank" rel="noopener noreferrer">
+                <div class="blog-date">Feb 2026</div>
+                <div class="blog-title">The Greatest Problem Solvers</div>
+            </a>
         </div>
     </section>
 
@@ -594,30 +710,6 @@
         </div>
 
         <div class="experience-list">
-            <!-- AI Lab at Biola -->
-            <div class="experience-item">
-                <div class="job-card">
-                    <div class="job-card-content">
-                        <div class="job-title">Co-Founder</div>
-                        <div class="job-company">AI Lab at Biola University</div>
-                        <div class="job-date">Feb 2024 - Current | La Mirada, CA</div>
-                    </div>
-                    <div class="job-card-toggle"></div>
-                </div>
-                <div class="connector"></div>
-                <div class="job-details">
-                    <div class="job-skills">
-                        <strong>Skills:</strong> FullStack, Python, MLOps, AI/ML, Cross-functional Leadership, Policy Compliance
-                    </div>
-                    <ul class="job-bullets">
-                        <li>Orchestrated Cross-Departmental Compliance: Navigated the legal, IT, and HR hurdles of a 100-year-old institution to establish the <strong>university's first framework</strong> for AI integration, ensuring all administrative and academic deployments met strict security and policy standards.</li>
-                        <li>Developed Technical Automation Workflows: Built and deployed custom serverless agents for non-technical users using Python and the Gemini API to solve operational bottlenecks, replacing hours of common FAQ and communication tasks with <strong>automated systems</strong>.</li>
-                        <li>Mentored student teams to victory in a <strong>$250,000 global AI hackathon</strong>, leveraging that success to secure strategic corporate partnerships and collaborating with Marketing to rebrand the university as a premier hub for emerging tech innovation.</li>
-                        <li>Facilitated High-Leverage Talent Development: Coached 100+ <strong>faculty, students, and conferences</strong> on "human-in-the-loop" methodologies, focusing on practical AI literacy that prioritizes individual agency and real-world career readiness.</li>
-                    </ul>
-                </div>
-            </div>
-
             <!-- Stealth Startup -->
             <div class="experience-item">
                 <div class="job-card">
@@ -637,6 +729,30 @@
                         <li>Data Engineering & ETL: Architected a custom Python-based ETL pipeline to ingest and synthesize 16M+ messages from disparate, sparse datasets; implemented complex regex-driven normalization and data-bridging logic to transform unstructured conversational data into a unified, queryable format.</li>
                         <li>ML Implementation & Strategy: Developed an LLM-based agent to analyze thousands of customer interactions, identifying key semantic patterns and performance bottlenecks that served as the primary "North Star" for the startup's data-driven operational strategy.</li>
                         <li>Stakeholder Impact & Communication: Translated deep-dive data analysis into actionable sales intelligence, uncovering a single conversation metric responsible for <strong>90% of revenue</strong>; collaborated with stakeholders to retrain the sales team, resulting in a <strong>120% increase in conversion rate</strong> and enhanced lead qualification.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- AI Lab at Biola -->
+            <div class="experience-item">
+                <div class="job-card">
+                    <div class="job-card-content">
+                        <div class="job-title">Co-Founder</div>
+                        <div class="job-company">AI Lab at Biola University</div>
+                        <div class="job-date">Feb 2024 - Feb 2026 | La Mirada, CA</div>
+                    </div>
+                    <div class="job-card-toggle"></div>
+                </div>
+                <div class="connector"></div>
+                <div class="job-details">
+                    <div class="job-skills">
+                        <strong>Skills:</strong> FullStack, Python, MLOps, AI/ML, Cross-functional Leadership, Policy Compliance
+                    </div>
+                    <ul class="job-bullets">
+                        <li>Orchestrated Cross-Departmental Compliance: Navigated the legal, IT, and HR hurdles of a 100-year-old institution to establish the <strong>university's first framework</strong> for AI integration, ensuring all administrative and academic deployments met strict security and policy standards.</li>
+                        <li>Developed Technical Automation Workflows: Built and deployed custom serverless agents for non-technical users using Python and the Gemini API to solve operational bottlenecks, replacing hours of common FAQ and communication tasks with <strong>automated systems</strong>.</li>
+                        <li>Mentored student teams to victory in a <strong>$250,000 global AI hackathon</strong>, leveraging that success to secure strategic corporate partnerships and collaborating with Marketing to rebrand the university as a premier hub for emerging tech innovation.</li>
+                        <li>Facilitated High-Leverage Talent Development: Coached 100+ <strong>faculty, students, and conferences</strong> on "human-in-the-loop" methodologies, focusing on practical AI literacy that prioritizes individual agency and real-world career readiness.</li>
                     </ul>
                 </div>
             </div>
