@@ -379,10 +379,10 @@
             text-underline-offset: 8px;
         }
         .blogs-list {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 24px;
         }
         .blog-item {
@@ -404,6 +404,13 @@
             color: #888;
             letter-spacing: 0.05em;
             margin-bottom: 8px;
+        }
+        .blog-item.latest {
+            grid-column: 1 / -1;
+            background-color: #ffe0e0;
+        }
+        .blog-item.latest:hover {
+            background-color: #FFA500;
         }
         .blog-item:hover .blog-date {
             color: #1a1a1a;
@@ -514,6 +521,9 @@
             .blogs-title {
                 font-size: 40px;
             }
+            .blogs-list {
+                grid-template-columns: 1fr;
+            }
             .blog-item {
                 padding: 20px 24px;
             }
@@ -608,6 +618,97 @@
             }
         }
 
+        /* Interests Section */
+        .interests-section {
+            background: #fff;
+            padding: 60px 80px;
+        }
+        .interests-title {
+            font-family: 'Silkscreen', 'Courier New', monospace;
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            display: inline-flex;
+            gap: 0.02em;
+        }
+        .interests-title span {
+            display: inline-block;
+            color: #1a1a1a;
+            text-shadow:
+                2px 2px 0 #fff,
+                -2px -2px 0 #fff,
+                2px -2px 0 #fff,
+                -2px 2px 0 #fff,
+                4px 4px 0 #fff,
+                5px 5px 0 currentColor,
+                6px 6px 0 #fff,
+                7px 7px 0 currentColor;
+        }
+        .interests-title-underline {
+            text-decoration: underline;
+            text-decoration-color: #4a7cbb;
+            text-decoration-thickness: 4px;
+            text-underline-offset: 8px;
+        }
+        .interests-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .interest-card {
+            background: #fff;
+            border: 3px solid #1a1a1a;
+            border-radius: 0;
+            padding: 30px 40px;
+            box-shadow: 8px 8px 0 #a0a0a0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #1a1a1a;
+        }
+        .interest-card a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .interest-card a:hover {
+            text-decoration: underline;
+            text-decoration-color: #4a7cbb;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 4px;
+        }
+
+        @media (max-width: 1100px) {
+            .interests-section {
+                padding: 40px 30px;
+            }
+            .interests-title {
+                font-size: 48px;
+                justify-content: center;
+            }
+            .interests-title-underline {
+                text-align: center;
+            }
+            .interests-list {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 600px) {
+            .interests-title {
+                font-size: 40px;
+            }
+            .interests-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            .interest-card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
         /* Desktop: hide toggle arrow */
         @media (min-width: 1101px) {
             .job-card-toggle {
@@ -690,6 +791,10 @@
         </div>
 
         <div class="blogs-list">
+            <a class="blog-item latest" href="https://josephhartono.substack.com/p/the-art-of-networking" target="_blank" rel="noopener noreferrer">
+                <div class="blog-date">Mar 2026</div>
+                <div class="blog-title">The Art of Networking</div>
+            </a>
             <a class="blog-item" href="https://iace.education/journal-blog/human-formation-in-an-artificial-world" target="_blank" rel="noopener noreferrer">
                 <div class="blog-date">Feb 2026</div>
                 <div class="blog-title">Human Formation in an Artificial World</div>
@@ -794,6 +899,45 @@
                         <li>Practiced Agile Scrum methodology, learned by reading PRs from Senior Engineers.</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Section -->
+    <section class="interests-section">
+        <div class="interests-title-underline">
+            <div class="interests-title">
+                <span>I</span><span>N</span><span>T</span><span>E</span><span>R</span><span>E</span><span>S</span><span>T</span><span>S</span>
+            </div>
+        </div>
+
+        <div class="interests-list">
+            <div class="interest-card">
+                <a href="https://ailabhack.com/flourishing" target="_blank" rel="noopener noreferrer">Human Enduring Skills</a>
+            </div>
+            <div class="interest-card">
+                Organizational Network Analysis
+            </div>
+            <div class="interest-card">
+                Cooking
+            </div>
+            <div class="interest-card">
+                Jazz Drumming
+            </div>
+            <div class="interest-card">
+                Basketball
+            </div>
+            <div class="interest-card">
+                Philosophy
+            </div>
+            <div class="interest-card">
+                Cybernetics
+            </div>
+            <div class="interest-card">
+                Startups
+            </div>
+            <div class="interest-card">
+                Unicycling
             </div>
         </div>
     </section>
@@ -1123,18 +1267,26 @@
             }
 
             async runStippling() {
-                this.initializePoints();
-
-                for (let i = 0; i < CONFIG.iterations; i++) {
-                    this.computeVoronoi();
-                    this.computeWeightedCentroids();
+                // Load precomputed points — no stippling needed
+                try {
+                    const resp = await fetch('stipple-points.json');
+                    const normalized = await resp.json();
+                    this.points = normalized.map(p => ({ x: p[0] * this.width, y: p[1] * this.height }));
+                    this.basePoints = this.points.map(p => ({ x: p.x, y: p.y }));
                     this.render();
-                    await new Promise(resolve => requestAnimationFrame(resolve));
+                    this.startAnimation();
+                } catch (e) {
+                    // Fallback: compute if JSON fails to load
+                    this.initializePoints();
+                    for (let i = 0; i < CONFIG.iterations; i++) {
+                        this.computeVoronoi();
+                        this.computeWeightedCentroids();
+                        this.render();
+                        await new Promise(resolve => requestAnimationFrame(resolve));
+                    }
+                    this.basePoints = this.points.map(p => ({ x: p.x, y: p.y }));
+                    this.startAnimation();
                 }
-
-                // Store base positions and start animation
-                this.basePoints = this.points.map(p => ({ x: p.x, y: p.y }));
-                this.startAnimation();
             }
         }
 
