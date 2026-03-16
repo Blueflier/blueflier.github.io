@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="portrait.webp" as="image" type="image/webp">
+    <link rel="preload" href="stipple-points.json" as="fetch" crossorigin>
     <style>
         * {
             box-sizing: border-box;
@@ -110,12 +112,16 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
+            flex-shrink: 0;
+            width: calc((100vh) * 864 / 1232);
+            width: calc((100lvh) * 864 / 1232);
         }
         #canvas {
             display: block;
             height: 100vh;
             height: 100lvh;
             width: auto;
+            aspect-ratio: 864 / 1232;
         }
         @media (max-width: 900px) {
             .hero-section {
@@ -1000,13 +1006,20 @@
                 this.time = 0;
                 this.animating = false;
 
+                // Prefetch JSON in parallel with image load
+                this._pointsPromise = fetch('stipple-points.json').then(r => r.json()).catch(() => null);
                 this.loadDefaultImage();
                 this.setupMouseTracking();
             }
 
             setupMouseTracking() {
+                // Cache rect and only update on resize/scroll
+                this.canvasRect = this.canvas.getBoundingClientRect();
+                const updateRect = () => { this.canvasRect = this.canvas.getBoundingClientRect(); };
+                window.addEventListener('resize', updateRect);
+                window.addEventListener('scroll', updateRect, { passive: true });
+
                 this.canvas.addEventListener('mousemove', (e) => {
-                    this.canvasRect = this.canvas.getBoundingClientRect();
                     const scaleX = this.width / this.canvasRect.width;
                     const scaleY = this.height / this.canvasRect.height;
                     this.mouse.x = (e.clientX - this.canvasRect.left) * scaleX;
@@ -1023,9 +1036,13 @@
                 const img = new Image();
                 img.onload = () => this.processImage(img);
                 img.onerror = () => {
-                    console.error('Failed to load portrait.png');
+                    // Fallback to JPEG if WebP fails
+                    const fallback = new Image();
+                    fallback.onload = () => this.processImage(fallback);
+                    fallback.onerror = () => console.error('Failed to load portrait');
+                    fallback.src = 'portrait.jpg';
                 };
-                img.src = 'portrait.png';
+                img.src = 'portrait.webp';
             }
 
             processImage(img) {
@@ -1267,10 +1284,10 @@
             }
 
             async runStippling() {
-                // Load precomputed points — no stippling needed
+                // Use prefetched points — no stippling needed
                 try {
-                    const resp = await fetch('stipple-points.json');
-                    const normalized = await resp.json();
+                    const normalized = await this._pointsPromise;
+                    if (!normalized) throw new Error('No points data');
                     this.points = normalized.map(p => ({ x: p[0] * this.width, y: p[1] * this.height }));
                     this.basePoints = this.points.map(p => ({ x: p.x, y: p.y }));
                     this.render();
